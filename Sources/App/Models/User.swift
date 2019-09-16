@@ -13,3 +13,5 @@ final class User: Codable {
 
 extension User: SQLiteModel {}
 extension User: Migration {}
+extension User: Content {}
+extension User: Parameter {}
