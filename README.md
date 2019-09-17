@@ -1,20 +1,28 @@
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/1342803/36623515-7293b4ec-18d3-11e8-85ab-4e2f8fb38fbd.png" width="320" alt="API Template">
-    <br>
-    <br>
-    <a href="http://docs.vapor.codes/3.0/">
-        <img src="http://img.shields.io/badge/read_the-docs-2196f3.svg" alt="Documentation">
-    </a>
-    <a href="https://discord.gg/vapor">
-        <img src="https://img.shields.io/discord/431917998102675485.svg" alt="Team Chat">
-    </a>
-    <a href="LICENSE">
-        <img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT License">
-    </a>
-    <a href="https://circleci.com/gh/vapor/api-template">
-        <img src="https://circleci.com/gh/vapor/api-template.svg?style=shield" alt="Continuous Integration">
-    </a>
-    <a href="https://swift.org">
-        <img src="http://img.shields.io/badge/swift-4.1-brightgreen.svg" alt="Swift 4.1">
-    </a>
-</p>
+# CRUDControllers
+
+##Overview
+
+Since I started dealing with REST API on my work as an iOS Developer I have the curiosity to explore the server-side world, but start it in a language with no familiarity can be a little hard. Vapor gave me the opportunity to try it out with my favorite language and I invite all Swift Developers to do the same, in a couple weeks I will come out with a tutorial to help it.
+
+##Give a try
+
+- [Install Vapor.](https://docs.vapor.codes/3.0/install/macos/)
+- Clone the repo.
+- Run following commands on repo directory:
+    ```
+        $ vapor build
+        $ vapor run
+    ```
+- Use this [Postman Requests Collection](https://www.getpostman.com/collections/5ec6c64b3021d4370670) to try it methods.
+
+##References
+###Docs
+- [Vapor Docs](https://docs.vapor.codes/3.0/)
+
+###Tutorials
+- [Vapor 3: Up and Running | Swift 4, Xcode 9
+](https://www.youtube.com/watch?v=taAvDSOEfnY&list=PL5h37q2DJtAOEEMSXN0Wf0bsXAWEr4FRg&index=1) - It was one of my first contacts with Vapor and shows the basics with a very funny approach.
+
+- [Vapor 3 Series I — CRUD with Controllers - Swift2Go - Medium](https://medium.com/swift2go/vapor-3-series-i-crud-with-controllers-d7848f9c193b) 
+        - It goes almost as far as I go with this project, but there are some missing informations that I intend to show later in a tutorial.
+  
