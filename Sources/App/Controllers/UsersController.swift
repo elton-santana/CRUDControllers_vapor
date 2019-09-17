@@ -8,32 +8,62 @@ final class UsersController: RouteCollection {
         }
     }
 
-    //read
+    //read all
     func getAllHandler(_ req: Request) throws -> Future<[User]> {
         return User.query(on: req).decode(User.self).all()
     }
 
+    //read one
     func getOneHandler(_ req: Request) throws -> Future<User> {
-        return try req.parameters.next(User.self)
+        guard let id = req.query[Int.self, at: "id"] else {
+            throw Abort(.badRequest)
+        }
+        return User.find(id, on: req).flatMap({ (user) -> EventLoopFuture<User> in
+            guard let user = user else {
+                throw Abort(.notFound)
+            }
+            
+            return user.restore(on: req)
+        })
     }
 
     //update
     func updateHandler(_ req: Request) throws -> Future<User> {
-        return try flatMap(to: User.self, 
-        req.parameters.next(User.self), 
-        req.content.decode(User.self)) { (user, updatedUser) in
-            user.name = updatedUser.name
-            user.username = updatedUser.username
+        return try req.content.decode(User.self).flatMap { newUser in
+            guard let id = newUser.id else {
+                throw Abort(.badRequest)
+            }
+            
+            let user = User.find(id, on: req).flatMap({ (user) -> EventLoopFuture<User> in
+                guard let user = user else {
+                    throw Abort(.notFound)
+                }
+                user.name = newUser.name
+                user.username = newUser.username
+                
+                return user.restore(on: req)
+            })
+            
             return user.save(on: req)
+            
         }
     }
 
     //delete
-    func deleteHandler(_ req: Request) throws -> Future<HTTPSStatus> {
-        return try req.parameters.next(User.self).flatMap { user in
-            return user.delete(on: req).trasform(to: HTTPSStatus.noContent)
-
+    func deleteHandler(_ req: Request) throws -> Future<User> {
+        guard let id = req.query[Int.self, at: "id"] else {
+            throw Abort(.badRequest)
         }
+        
+        let user = User.find(id, on: req).flatMap({ (user) -> EventLoopFuture<User> in
+            guard let user = user else {
+                throw Abort(.notFound)
+            }
+            return user.restore(on: req)
+        })
+        
+        return user.delete(on: req)
+        
     }
 
     func boot(router: Router) throws {
@@ -41,7 +71,7 @@ final class UsersController: RouteCollection {
         usersRoute.get(use: getAllHandler)
         usersRoute.get(User.parameter, use: getOneHandler)
         usersRoute.post(use: createHandler)
-        usersRoute.put(User.parameter, use: updateUser)
+        usersRoute.put(User.parameter, use: updateHandler)
         usersRoute.delete(User.parameter, use: deleteHandler)
     }
 }
