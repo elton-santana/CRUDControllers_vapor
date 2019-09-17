@@ -1,25 +1,25 @@
 # CRUDControllers
 
-##Overview
+## Overview
 
 Since I started dealing with REST API on my work as an iOS Developer I have the curiosity to explore the server-side world, but start it in a language with no familiarity can be a little hard. Vapor gave me the opportunity to try it out with my favorite language and I invite all Swift Developers to do the same, in a couple weeks I will come out with a tutorial to help it.
 
-##Give a try
+## Give a try
 
 - [Install Vapor.](https://docs.vapor.codes/3.0/install/macos/)
 - Clone the repo.
 - Run following commands on repo directory:
-    ```
-        $ vapor build
-        $ vapor run
-    ```
+```
+    $ vapor build
+    $ vapor run
+```
 - Use this [Postman Requests Collection](https://www.getpostman.com/collections/5ec6c64b3021d4370670) to try it methods.
 
-##References
-###Docs
+## References
+### Docs
 - [Vapor Docs](https://docs.vapor.codes/3.0/)
 
-###Tutorials
+### Tutorials
 - [Vapor 3: Up and Running | Swift 4, Xcode 9
 ](https://www.youtube.com/watch?v=taAvDSOEfnY&list=PL5h37q2DJtAOEEMSXN0Wf0bsXAWEr4FRg&index=1) - It was one of my first contacts with Vapor and shows the basics with a very funny approach.
 
