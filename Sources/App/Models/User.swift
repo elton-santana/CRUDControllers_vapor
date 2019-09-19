@@ -1,5 +1,5 @@
 import Vapor 
-import FluentSQLite
+import FluentMySQL
 
 final class User: Codable {
     var id: Int?
@@ -11,7 +11,8 @@ final class User: Codable {
     }
 }
 
-extension User: SQLiteModel {}
+extension User: MySQLModel {}
 extension User: Migration {}
 extension User: Content {}
 extension User: Parameter {}
+
