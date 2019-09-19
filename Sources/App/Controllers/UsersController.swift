@@ -8,23 +8,23 @@ final class UsersController: RouteCollection {
         }
     }
 
-    //read all
-    func getAllHandler(_ req: Request) throws -> Future<[User]> {
-        return User.query(on: req).decode(User.self).all()
-    }
-
     //read one
     func getOneHandler(_ req: Request) throws -> Future<User> {
-        guard let id = req.query[Int.self, at: "id"] else {
-            throw Abort(.badRequest)
-        }
+        let id: Int
+        do { id = try req.parameters.next(Int.self) }
+        catch { throw Abort(.badRequest) }
+        
         return User.find(id, on: req).flatMap({ (user) -> EventLoopFuture<User> in
             guard let user = user else {
                 throw Abort(.notFound)
             }
-            
             return user.restore(on: req)
         })
+    }
+
+    //read all
+    func getAllHandler(_ req: Request) throws -> Future<[User]> {
+        return User.query(on: req).decode(User.self).all()
     }
 
     //update
@@ -67,9 +67,9 @@ final class UsersController: RouteCollection {
     }
 
     func boot(router: Router) throws {
-        let usersRoute = router.grouped("api", "users")
-        usersRoute.get(use: getAllHandler)
-        usersRoute.get(User.parameter, use: getOneHandler)
+        let usersRoute = router.grouped("user")
+        usersRoute.get("all",use: getAllHandler)
+        usersRoute.get(Int.parameter, use: getOneHandler)
         usersRoute.post(use: createHandler)
         usersRoute.put(User.parameter, use: updateHandler)
         usersRoute.delete(User.parameter, use: deleteHandler)
