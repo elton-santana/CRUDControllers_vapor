@@ -71,7 +71,7 @@ final class UsersController: RouteCollection {
         usersRoute.get("all",use: getAllHandler)
         usersRoute.get(Int.parameter, use: getOneHandler)
         usersRoute.post(use: createHandler)
-        usersRoute.put(User.parameter, use: updateHandler)
+        usersRoute.put(use: updateHandler)
         usersRoute.delete(User.parameter, use: deleteHandler)
     }
 }
